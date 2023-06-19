@@ -12,7 +12,6 @@ class SecondActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
 
-//        var intent = intent
         val question = intent.getStringExtra("Question")
         val answerEt = findViewById<EditText>(R.id.answerEt)
         val okBtn2 = findViewById<Button>(R.id.okBtn2)
@@ -22,11 +21,9 @@ class SecondActivity : AppCompatActivity() {
 
         okBtn2.setOnClickListener {
             var answer = answerEt.text.toString()
-
-            val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("Answer", answer)
-            intent.putExtra("Question", question)
-            startActivity(intent)
+            setResult(RESULT_OK,intent)
+            finish()
         }
     }
 }

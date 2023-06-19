@@ -14,18 +14,20 @@ class MainActivity : AppCompatActivity() {
 
         val questionEt = findViewById<EditText>(R.id.questionEt)
         val okBtn = findViewById<Button>(R.id.okBtn)
+
         okBtn.setOnClickListener {
             val question = questionEt.text.toString()
             val intent = Intent(this,SecondActivity::class.java)
             intent.putExtra("Question",question)
-            startActivity(intent)
+            startActivityForResult(intent,1)
        }
 
-        val answer = intent.getStringExtra("Answer")
-        val question = intent.getStringExtra("Question")
-        if (answer != null) {
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(data != null && requestCode == 1 && resultCode == RESULT_OK) {
             val qaTv = findViewById<TextView>(R.id.qaTv)
-            qaTv.text = ("Вопрос: "+question+"\nОтвет: "+answer)
+            qaTv.text = ("Ответ: "+data.getStringExtra("Answer"))
         }
     }
 }
